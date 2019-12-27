@@ -11,6 +11,3 @@ class Skill(models.Model):
     time_interval = models.FloatField(),
     addtional_time = models.FloatField(),
     skill_type = models.IntegerField()
-
-class Timeline(models.Model):
-    
