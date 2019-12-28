@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'gantt/style.css' %}">
+
+{% if latest_character_list %}
+    <ul>
+    {% for character in latest_character_list %}
+        <li><a href="{% url 'detail' character.id %}">{{ character.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
