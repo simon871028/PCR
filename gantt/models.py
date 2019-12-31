@@ -13,3 +13,4 @@ class Effect(models.Model):
     duration = models.FloatField()
     addtional_time = models.FloatField()
     description = models.CharField(max_length=255)
+    is_weapon = models.BooleanField(max_length=255,default=False)

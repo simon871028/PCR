@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Character
+from .models import Character,Effect
 from django.http import Http404
 from django.http import HttpResponse
 
