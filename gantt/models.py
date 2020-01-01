@@ -16,4 +16,11 @@ class Effect(models.Model):
     duration = models.FloatField()
     addtional_time = models.FloatField()
     description = models.CharField(max_length=255)
-    is_weapon = models.BooleanField(max_length=255, default=False)
+    is_weapon = models.BooleanField(max_length=255,default=False)
+
+class TimeLine(models.Model):
+    character =  models.ForeignKey(Character, on_delete = models.CASCADE)
+    skill_type = models.CharField(max_length=255)
+    start_time = models.CharField(max_length=255)
+    end_time = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)

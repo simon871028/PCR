@@ -6,7 +6,6 @@ import plotly.figure_factory as ff
 
 
 def index(request):
-    
     latest_character_list = Character.objects.order_by('pk')
     context = {'latest_character_list': latest_character_list}
 
@@ -25,7 +24,10 @@ def character_list(request):
     return render(request,'gantt/detail.html',{"context":context})
 
 def create_data(request):
-    if(Character.objects.get(name='宮子') is None):
+    try:
+        Character.objects.get(name='宮子')
+        return HttpResponse("成功了 別再按了")
+    except:
         Character.objects.create(name='宮子')
         Character.objects.create(name='莉瑪')
         Character.objects.create(name='空花')
@@ -312,6 +314,5 @@ def create_data(request):
         Effect.objects.create(character_id=Character.objects.get(name='香織'),skill_name = '2',skill_type=1,duration=0.05,addtional_time=0,description='',is_weapon=1)
         Effect.objects.create(character_id=Character.objects.get(name='香織'),skill_name = '2',skill_type=1,duration=0.05,addtional_time=0,description='',is_weapon=0)
         return HttpResponse("已經加了")
-    return HttpResponse("成功了 別再按了")
     
     
