@@ -5,25 +5,23 @@ from django.http import HttpResponse
 import plotly.figure_factory as ff
 
 
-
 def index(request):
+    
     latest_character_list = Character.objects.order_by('pk')
     context = {'latest_character_list': latest_character_list}
 
-    df = [dict(Task="Job A", Start='2016-01-01 00:01:00', Finish='2016-01-01 00:01:30'),
-      dict(Task="Job B", Start='2016-01-01 00:01:00', Finish='2016-01-01 00:01:30')]
+    df = [dict(Task="Job Skill 1", Start='2016-01-01 00:00:00', Finish='2016-01-01 00:00:30'),
+      dict(Task="Job Skill 2", Start='2016-01-01 00:00:20', Finish='2016-01-01 00:01:30')]
 
     fig = ff.create_gantt(df)
+    fig.layout.xaxis.tickformat = '%M:%S'
     string = fig.to_html()
-
     return render(request, 'gantt/index.html', {"context" : context , "chart" : string}) 
 
 
 def detail(request, character_id):
     character = get_object_or_404(Character, pk=character_id)
     return render(request, 'gantt/detail.html', {'character': character})
-
-
 
 def create_data(request):
     if(Character.objects.get(name='宮子') is None):
@@ -101,7 +99,8 @@ def create_data(request):
         Character.objects.create(name='優依')
         Character.objects.create(name='雪')
         Character.objects.create(name='鏡華')
-        Character.objects.create(name='美咲(聖誕')
+        Character.objects.create(name='美咲(萬聖')
+        Character.objects.create(name='香織')
         Effect.objects.create(character_id=Character.objects.get(name='宮子'),skill_name = '1',skill_type=1,duration=3,addtional_time=0.01,description='無敵',is_weapon=0)
         Effect.objects.create(character_id=Character.objects.get(name='宮子'),skill_name = '2',skill_type=2,duration=0,addtional_time=0,description='補血',is_weapon=0)
         Effect.objects.create(character_id=Character.objects.get(name='莉瑪'),skill_name = '1',skill_type=1,duration=16,addtional_time=0,description='增加物防',is_weapon=0)
@@ -306,8 +305,11 @@ def create_data(request):
         Effect.objects.create(character_id=Character.objects.get(name='雪'),skill_name = '2',skill_type=1,duration=8,addtional_time=0,description='魅惑',is_weapon=1)
         Effect.objects.create(character_id=Character.objects.get(name='鏡華'),skill_name = '1',skill_type=1,duration=0.05,addtional_time=0,description='',is_weapon=0)
         Effect.objects.create(character_id=Character.objects.get(name='鏡華'),skill_name = '2',skill_type=2,duration=9,addtional_time=0,description='增加魔攻',is_weapon=0)
-        Effect.objects.create(character_id=Character.objects.get(name='美咲(聖誕'),skill_name = '1',skill_type=1,duration=5,addtional_time=0,description='魅惑',is_weapon=0)
-        Effect.objects.create(character_id=Character.objects.get(name='美咲(聖誕'),skill_name = '2',skill_type=2,duration=12,addtional_time=0,description='增加魔攻',is_weapon=0)
+        Effect.objects.create(character_id=Character.objects.get(name='美咲(萬聖'),skill_name = '1',skill_type=1,duration=5,addtional_time=0,description='魅惑',is_weapon=0)
+        Effect.objects.create(character_id=Character.objects.get(name='美咲(萬聖'),skill_name = '2',skill_type=2,duration=12,addtional_time=0,description='增加魔攻',is_weapon=0)
+        Effect.objects.create(character_id=Character.objects.get(name='香織'),skill_name = '1',skill_type=1,duration=0.05,addtional_time=0,description='',is_weapon=0)
+        Effect.objects.create(character_id=Character.objects.get(name='香織'),skill_name = '2',skill_type=1,duration=0.05,addtional_time=0,description='',is_weapon=1)
+        Effect.objects.create(character_id=Character.objects.get(name='香織'),skill_name = '2',skill_type=1,duration=0.05,addtional_time=0,description='',is_weapon=0)
         return HttpResponse("已經加了")
     return HttpResponse("成功了 別再按了")
     
