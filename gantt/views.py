@@ -19,9 +19,10 @@ def index(request):
     return render(request, 'gantt/index.html', {"context" : context , "chart" : string}) 
 
 
-def detail(request, character_id):
-    character = get_object_or_404(Character, pk=character_id)
-    return render(request, 'gantt/detail.html', {'character': character})
+def character_list(request):
+    latest_character_list = Character.objects.order_by('pk')
+    context = {'latest_character_list': latest_character_list}
+    return render(request,'gantt/detail.html',{"context":context})
 
 def create_data(request):
     if(Character.objects.get(name='宮子') is None):
