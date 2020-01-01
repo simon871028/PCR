@@ -1,6 +1,9 @@
-<h1>{{ character.name }}</h1>
+{% if latest_character_list %}
 <ul>
-{% for choice in character.choice_set.all %}
-    <li>{{ choice.choice_text }}</li>
-{% endfor %}
+    {% for character in latest_character_list %}
+    <li><a img src="{{Character.photo}}">{{ character.name }}</a></li>
+    {% endfor %}
 </ul>
+{% else %}
+<p>No polls are available.</p>
+{% endif %}
