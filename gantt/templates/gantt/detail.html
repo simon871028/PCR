@@ -1,7 +1,10 @@
-{% if latest_character_list %}
+{% if context.latest_character_list %}
 <ul>
-    {% for character in latest_character_list %}
-    <li><a img src="{{Character.photo}}">{{ character.name }}</a></li>
+    {% for character in context.latest_character_list %}
+    <li>
+        <img src="/{{character.photo}}">
+        <a>{{ character.name }}</a>
+    </li>
     {% endfor %}
 </ul>
 {% else %}
