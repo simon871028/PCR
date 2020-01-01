@@ -1,12 +1,122 @@
-{% if context.latest_character_list %}
-<ul>
-    {% for character in context.latest_character_list %}
-    <li>
-        <img src="/{{character.photo}}">
-        <a>{{ character.name }}</a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No polls are available.</p>
-{% endif %}
+{% load static %}
+<style>
+    #char {
+        width: 85%;
+        margin: 0 auto;
+        border: 1px solid #cccccc;
+        height: 700px;
+        background-color: #FFFFFF;
+        padding: 5px;
+        overflow: auto;
+    }
+
+    #head {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #button1 {
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    #send {
+        align-items: center;
+    }
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<html>
+
+<div id="head" style="max-width: 725px;" style="text-align:center" id="send">
+    <table class="table" style="max-width: 2000px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+                <th scope="col">5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_1" onclick="remove_character()"></td>
+                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_2" onclick="remove_character()"></td>
+                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_3" onclick="remove_character()"></td>
+                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_4" onclick="remove_character()"></td>
+                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_5" onclick="remove_character()"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div align="center"><button type="submit" class="btn btn-primary">隊伍確認</button></div>
+
+</div>
+
+<body>
+    {% if context.latest_character_list %}
+    <div id="char" class="row row-cols-1 row-cols-md-3">
+        {% for character in context.latest_character_list %}
+        <div class="col md-4" style="width:200px;height: 200px;">
+            <button class="card" style="width:150px;height: 150px;">
+                <img onclick="add_character()" id="{{character.id}}" src="/{{character.photo}}"
+                    style="width:150px;height: 150px;">
+            </button>
+            <div class="card-body" style="text-align: center;width:150px;height: 150px;">
+                {{ character.name }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No polls are available.</p>
+    {% endif %}
+</body>
+
+</html>
+<script>
+    var character_id = [];
+    function add_character() {
+        var n = $("#" + event.srcElement.id).attr('src');
+        if (character_id.length < 5 && character_id.find(x => x == event.srcElement.id) == undefined) {
+            $("#_" + (character_id.length + 1)).attr('src', n);
+            character_id.push(event.srcElement.id);
+        }
+    }
+
+    function remove_character() {
+        var n = $("#" + event.srcElement.id).attr('src');
+        if (character_id.length > 0) {
+            $("#" + event.srcElement.id).attr('src', "{% static 'gantt/images/childman.jpeg' %}");
+            var id = event.srcElement.id;
+            id = parseInt(String(id).replace('_', ''), 10);
+            for (var i = id + 1; i <= character_id.length; i++) {
+                //console.log(i);
+                $("#_" + (i - 1)).attr('src', $("#_" + i).attr('src'));
+                $("#_" + i).attr('src', "{% static 'gantt/images/childman.jpeg' %}");
+            }
+
+            character_id.splice(id - 1, 1);
+            //console.log(character_id);
+        }
+    }
+</script>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
