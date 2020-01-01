@@ -26,8 +26,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('skill_type', models.CharField(max_length=255)),
                 ('start_time', models.CharField(max_length=255)),
-                ('end_time', models.CharField(max_length=255)),
-                ('description', models.CharField(max_length=255)),
                 ('character', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='gantt.Character')),
             ],
         ),

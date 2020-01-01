@@ -22,5 +22,3 @@ class TimeLine(models.Model):
     character =  models.ForeignKey(Character, on_delete = models.CASCADE)
     skill_type = models.CharField(max_length=255)
     start_time = models.CharField(max_length=255)
-    end_time = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
