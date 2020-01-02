@@ -3,7 +3,22 @@ from .models import Character,Effect
 from django.http import Http404
 from django.http import HttpResponse
 import plotly.figure_factory as ff
+from .forms import AddForm
 
+def get_id(request):
+    
+    if request.method == 'POST':
+        form = AddForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            
+            return render(request, 'index.html', {'form': form})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = AddForm()
+
+    return render(request, 'detail.html', {'form': form})
 
 def index(request):
     latest_character_list = Character.objects.order_by('pk')

@@ -28,26 +28,28 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <html>
-
+<title>編列隊伍</title>
 <div id="head" style="max-width: 725px;" style="text-align:center" id="send">
-    <div class="table" style="max-width: 2000px;">
 
-        <div >
-            <div class="row row-cols-1 row-cols-md-3">
-                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_1" onclick="remove_character()"></div>
-                <div style="width:100px;"class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_2" onclick="remove_character()"></div>
-                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_3" onclick="remove_character()"></div>
-                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_4" onclick="remove_character()"></div>
-                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_5" onclick="remove_character()"></div>
-            </div>
+    <form id="team" method="POST">
+        <div align="center"><label align="center>">Team Composition: </label></div>
+        {% csrf_token %}
+        <div class="row row-cols-1 row-cols-md-3">
+            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                    style="width:100px; height:100;" id="_1" onclick="remove_character()"></div>
+            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                    style="width:100px; height:100;" id="_2" onclick="remove_character()"></div>
+            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                    style="width:100px; height:100;" id="_3" onclick="remove_character()"></div>
+            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                    style="width:100px; height:100;" id="_4" onclick="remove_character()"></div>
+            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                    style="width:100px; height:100;" id="_5" onclick="remove_character()"></div>
         </div>
-    </div>
-    <div align="center"><button type="submit" class="btn btn-primary">隊伍確認</button></div>
+
+
+        <div align="center"><button type="submit" class="btn btn-primary">隊伍確認</button></div>
+    </form>
 
 </div>
 
