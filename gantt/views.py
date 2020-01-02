@@ -9,7 +9,7 @@ import plotly.figure_factory as ff
 def index(request):
 
     get_df = []
-    ids = ['3','10','15','14']
+    ids = ['3','10','18','14','15']
 
     for id in ids:
         latest_character = Character.objects.get(id = id)
@@ -37,9 +37,13 @@ def index(request):
                     attack_type = '魔防'
                 elif e.attack_type == "5":
                     attack_type = 'TP上升'
-                tmp_len = len([ele for ele in tmp_df if start > ele['Finish']])
-                tmp_df.append(dict(Start=start,Finish=end))
-                get_df.append(dict(Task=" "*tmp_len+e.character_id.name + " " + e.description, Start=start, Finish=end,Resource=attack_type))
+                count = 0
+                for ele in tmp_df:
+                    if start >= ele['Finish']:
+                        if ele['Length'] == count:
+                            count += 1
+                tmp_df.append(dict(Start=start,Finish=end,Length=count))
+                get_df.append(dict(Task=" "*count+e.character_id.name + " " + e.description, Start=start, Finish=end,Resource=attack_type))
                 
 
     colors = {'物攻': 'rgb(255, 0, 0)',
