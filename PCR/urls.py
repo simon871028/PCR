@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('gantt/', include('gantt.urls')),
+    path('', include('gantt.urls')),
     path('admin/', admin.site.urls),
-    # path('character/',include('gantt.urls')),
+   
 ]

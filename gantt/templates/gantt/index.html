@@ -4,6 +4,17 @@
         width: 75%;
         margin: 0 auto;
     }
+
+    body {
+        background-image: url("{% static 'gantt/images/bg.png' %}");
+    }
+
+    .text {
+        font-family: fantasy;
+        font-size: 50;
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
 </style>
 
 
@@ -19,38 +30,28 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
 <html>
-<title>技能持續時間圖表</title>
-<div id="head" style="max-width: 500px;" style="text-align:center">
-    <table class="table" style="max-width: 2000px;">
-        <thead>
-            <tr style="text-align: center;">
-                <th scope="col">1</th>
-                <th scope="col">2</th>
-                <th scope="col">3</th>
-                <th scope="col">4</th>
-                <th scope="col">5</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="width:100px;"><img src="{% static 'gantt/images/伶.png' %}" alt=""
-                        style="width:100px; height:100;"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/優衣.png' %}" alt=""
-                        style="width:100px; height:100;"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/霞.png' %}" alt=""
-                        style="width:100px; height:100;"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/真琴.png' %}" alt=""
-                        style="width:100px; height:100;"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/日和.png' %}" alt=""
-                        style="width:100px; height:100;"></td>
-            </tr>
-        </tbody>
-    </table>
 
-</div>
+<body>
+    <title>技能持續時間圖表</title>
+    <div id="head" align="center" style="max-width: 710px;" style="text-align:center" id="send">
 
-<div style="max-width: 2000px;margin-top: 46px;">
-    {{ chart|safe }}
-</div>
+        {% if cs %}
+        <div align="center"><label align="center" class="text">Team Composition: </label></div>
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for c in cs %}
+            <div style="width:100px;" class="col md-4"><img src="/{{c.photo}}" alt="" style="width:100px; height:100;">
+            </div>
+            {%endfor%}
+        </div>
+        {% endif %}
+
+    </div>
+    <div align="center" style="padding:15px"><button type="submit" onclick=window.location.href="/list"
+            class="btn btn-outline-dark">重新編輯隊伍</button></div>
+
+    <div style=" max-width: 2000px;margin-top: 30px;">
+        {{ chart|safe }}
+    </div>
+</body>
 
 </html>

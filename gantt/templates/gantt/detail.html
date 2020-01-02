@@ -5,14 +5,19 @@
         margin: 0 auto;
         border: 1px solid #cccccc;
         height: 700px;
-        background-color: #FFFFFF;
+        background-color: transparent;
         padding: 5px;
         overflow: auto;
+    }
+
+    body {
+        background-image: url("{% static 'gantt/images/bg.png' %}");
     }
 
     #head {
         width: 100%;
         margin: 0 auto;
+        background-color: transparent;
     }
 
     #button1 {
@@ -23,37 +28,50 @@
     #send {
         align-items: center;
     }
+
+    .text {
+        font-family: fantasy;
+        font-size: 50;
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
 </style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <html>
 <title>編列隊伍</title>
-<div id="head" style="max-width: 725px;" style="text-align:center" id="send">
-
-    <form id="team" method="POST">
-        <div align="center"><label align="center>">Team Composition: </label></div>
-        {% csrf_token %}
-        <div class="row row-cols-1 row-cols-md-3">
-            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                    style="width:100px; height:100;" id="_1" onclick="remove_character()"></div>
-            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                    style="width:100px; height:100;" id="_2" onclick="remove_character()"></div>
-            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                    style="width:100px; height:100;" id="_3" onclick="remove_character()"></div>
-            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                    style="width:100px; height:100;" id="_4" onclick="remove_character()"></div>
-            <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                    style="width:100px; height:100;" id="_5" onclick="remove_character()"></div>
-        </div>
-
-
-        <div align="center"><button type="submit" class="btn btn-primary">隊伍確認</button></div>
-    </form>
-
-</div>
 
 <body>
+    <div id="head" align="center" style="max-width: 715px;" style="text-align:center" id="send">
+
+        <form id="team" method="POST" action="/">
+            <div align="center"><label align="center" class="text">Team Composition: </label></div>
+            {% csrf_token %}
+            <div class="row row-cols-1 row-cols-md-3">
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_1" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_2" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_3" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_4" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_5" onclick="remove_character()"></div>
+            </div>
+            <input type="number" name="character_id_1" id="__1" value="" style="display: none;" required>
+            <input type="number" name="character_id_2" id="__2" value="" style="display: none;" required>
+            <input type="number" name="character_id_3" id="__3" value="" style="display: none;" required>
+            <input type="number" name="character_id_4" id="__4" value="" style="display: none;" required>
+            <input type="number" name="character_id_5" id="__5" value="" style="display: none;" required>
+            <div align="center" style="padding:15px"><button type="submit" class="btn btn-outline-dark"
+                    onclick="check_empty()">隊伍確認</button></div>
+        </form>
+
+    </div>
+
+
     {% if context.latest_character_list %}
     <div id="char" class="row row-cols-1 row-cols-md-3">
         {% for character in context.latest_character_list %}
@@ -80,6 +98,7 @@
         var n = $("#" + event.srcElement.id).attr('src');
         if (character_id.length < 5 && character_id.find(x => x == event.srcElement.id) == undefined) {
             $("#_" + (character_id.length + 1)).attr('src', n);
+            $("#__" + (character_id.length + 1)).attr('value', event.srcElement.id);
             character_id.push(event.srcElement.id);
         }
     }
@@ -88,16 +107,25 @@
         var n = $("#" + event.srcElement.id).attr('src');
         if (character_id.length > 0) {
             $("#" + event.srcElement.id).attr('src', "{% static 'gantt/images/childman.jpeg' %}");
+            $("#_" + event.srcElement.id).attr('value', "");
             var id = event.srcElement.id;
             id = parseInt(String(id).replace('_', ''), 10);
             for (var i = id + 1; i <= character_id.length; i++) {
                 //console.log(i);
                 $("#_" + (i - 1)).attr('src', $("#_" + i).attr('src'));
                 $("#_" + i).attr('src', "{% static 'gantt/images/childman.jpeg' %}");
+
+                $("#__" + (i - 1)).attr('value', $("#__" + i).attr('value'));
+                $("#__" + i).attr('value', "");
             }
 
             character_id.splice(id - 1, 1);
             //console.log(character_id);
+        }
+    }
+    function check_empty() {
+        if (character_id.length != 5) {
+            alert('需要五位角色才能組成隊伍！')
         }
     }
 </script>
