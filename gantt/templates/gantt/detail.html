@@ -30,31 +30,23 @@
 <html>
 
 <div id="head" style="max-width: 725px;" style="text-align:center" id="send">
-    <table class="table" style="max-width: 2000px;">
-        <thead>
-            <tr style="text-align: center;">
-                <th scope="col">1</th>
-                <th scope="col">2</th>
-                <th scope="col">3</th>
-                <th scope="col">4</th>
-                <th scope="col">5</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_1" onclick="remove_character()"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_2" onclick="remove_character()"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_3" onclick="remove_character()"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_4" onclick="remove_character()"></td>
-                <td style="width:100px;"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
-                        style="width:100px; height:100;" id="_5" onclick="remove_character()"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table" style="max-width: 2000px;">
+
+        <div >
+            <div class="row row-cols-1 row-cols-md-3">
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_1" onclick="remove_character()"></div>
+                <div style="width:100px;"class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_2" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_3" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_4" onclick="remove_character()"></div>
+                <div style="width:100px;" class="col md-4"><img src="{% static 'gantt/images/childman.jpeg' %}" alt=""
+                        style="width:100px; height:100;" id="_5" onclick="remove_character()"></div>
+            </div>
+        </div>
+    </div>
     <div align="center"><button type="submit" class="btn btn-primary">隊伍確認</button></div>
 
 </div>
