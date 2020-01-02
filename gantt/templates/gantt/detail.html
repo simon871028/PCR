@@ -12,6 +12,7 @@
 
     body {
         background-image: url("{% static 'gantt/images/bg.png' %}");
+        background-size: cover;
     }
 
     #head {
@@ -34,6 +35,11 @@
         font-size: 50;
         padding-top: 20px;
         padding-bottom: 15px;
+    }
+
+    .card-body {
+        font-family: Microsoft JhengHe;
+        font-size: 23px;
     }
 </style>
 
@@ -65,7 +71,7 @@
             <input type="number" name="character_id_3" id="__3" value="" style="display: none;" required>
             <input type="number" name="character_id_4" id="__4" value="" style="display: none;" required>
             <input type="number" name="character_id_5" id="__5" value="" style="display: none;" required>
-            <div align="center" style="padding:15px"><button type="submit" class="btn btn-outline-dark"
+            <div align="center" style="padding:15px"><button type="submit" class="btn btn-outline-dark btn-lg"
                     onclick="check_empty()">隊伍確認</button></div>
         </form>
 
