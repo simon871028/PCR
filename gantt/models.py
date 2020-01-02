@@ -16,6 +16,7 @@ class Effect(models.Model):
     duration = models.FloatField()
     addtional_time = models.FloatField()
     description = models.CharField(max_length=255)
+    attack_type = models.CharField(max_length=255,default=3)
     is_weapon = models.BooleanField(max_length=255,default=False)
 
 class TimeLine(models.Model):
